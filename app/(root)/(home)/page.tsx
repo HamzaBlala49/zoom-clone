@@ -25,8 +25,11 @@ const Home = () => {
       <div className='h-[300px] w-full rounded-[20px] bg-hero bg-cover'>
         <div className='flex h-full flex-col justify-between max-md:px-5 max-md:py-8 lg:p-11'>
           <h2 className='glassmorphism max-w-[370px] rounded py-2 text-center text-base font-normal'>
-            Upcoming Meeting at {" "}
-            {(upcomingCalls.reverse()[0] as Call)?.state?.startsAt?.toLocaleString()}
+            {upcomingCalls.length > 0 ? 
+            `Upcoming Meeting at ${(upcomingCalls.reverse()[0] as Call)?.state?.startsAt?.toLocaleString()} `
+            :
+            "No Upcoming Meeting"
+            }
           </h2>
           <div className='flex flex-col gap-2'>
             <h1 className='text-4xl font-extrabold lg:txt-7xl'>
