@@ -81,12 +81,12 @@ const CallList = ({type}:callListProps) => {
     if(isLoading) return <Loader/>
 
     return (
-        <div className='grid grid-cols-1 gap-5 xl:grid-cols-2 '>
+        <div className='grid grid-cols-1 gap-5 xl:grid-cols-2'>
             {calls && calls.length > 0 ? calls.map ((meeting:Call | CallRecording)=>(
                 <MeetingCard
                     key={(meeting as Call).id}
                     icon={ type === "ended" ? '/icons/previous.svg' : type === "upcoming" ? '/icons/upcoming.svg' : '/icons/recordings.svg' }
-                    title={(meeting as Call ).state?.custom.description || (meeting as CallRecording ).filename || "No description"}
+                    title={(meeting as Call ).state?.custom.description || (meeting as CallRecording ).filename.substring(0,30) || "No description"}
                     date={ (meeting as Call ).state?.startsAt?.toLocaleString() || (meeting as CallRecording ).start_time.toLocaleString() }
                     isPreviousMeeting ={ type === "ended"}
                     buttonIcon1={ type === "recording" ? "/icons/play.svg" : undefined}
