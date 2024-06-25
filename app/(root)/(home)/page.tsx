@@ -1,23 +1,24 @@
 "use client"
+import Loader from '@/components/Loader';
 import MeetingTypeList from '@/components/MeetingTypeList';
 import { useGetCalls } from '@/hooks/useGetCalls';
 import { Call } from '@stream-io/video-react-sdk';
 
 
 const Home = () => {
-  const { upcomingCalls } = useGetCalls()
+  const { upcomingCalls, isLoading } = useGetCalls()
   const now = new Date();
-  const threeHoursLater = new Date(now.getTime() + 3 * 60 * 60 * 1000);
 
-  const time = threeHoursLater.toLocaleTimeString("en-US", {
+  const time = now.toLocaleTimeString("en-US", {
     hour:"2-digit",
     minute:"2-digit",
   })
 
   const date = (new Intl.DateTimeFormat('en-US', {
     dateStyle:"full"
-  })).format(threeHoursLater)
+  })).format(now)
 
+  if(isLoading) return <Loader/>
 
   return (
     <section className='flex size-full flex-col gap-10 text-white'>
